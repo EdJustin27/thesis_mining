@@ -1,0 +1,77 @@
+﻿body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1c1c1c; /* Dark gray background */
+    color: #ff6600; /* Orange text color */
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #ff6600; /* Orange header background */
+    color: #1c1c1c; /* Black text color */
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+main {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #262626; /* Dark background for main */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #ff6600; /* Orange heading color */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+    ul li {
+        margin-bottom: 10px;
+        padding-left: 20px;
+        position: relative;
+    }
+
+        ul li:before {
+            content: '•';
+            color: #ff6600; /* Orange bullets */
+            position: absolute;
+            left: 0;
+        }
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #333; /* Dark background for textarea */
+    color: #fff; /* White text */
+    border: 1px solid #ff6600;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #ff6600; /* Orange button color */
+    color: #1c1c1c; /* Black text color */
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+    button:hover {
+        background-color: #e65c00; /* Darker orange on hover */
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    }
+
+/* Additional interactive effects can be added with JavaScript or CSS animations */

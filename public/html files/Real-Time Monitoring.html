@@ -1,0 +1,354 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Data Monitoring</title>
+    <link rel="stylesheet" href="path/to/your/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1c1c1c;
+            color: #ff6600;
+            overflow: hidden;
+        }
+        header {
+            background-color: #ff6600;
+            color: #1c1c1c;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        section {
+            margin: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-left: 320px;
+        }
+        #monitoringContainer {
+            background-color: #262626;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            width: 100%;
+            margin: auto;
+        }
+        .data-entry {
+            background-color: #333;
+            color: #fff;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: left;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        #timeDisplay {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #ff6600;
+            text-align: center;
+        }
+        #toggleDataButton {
+            background-color: #ff6600;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        #dataContainer {
+            display: block;
+            background-color: #262626;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            max-width: 300px;
+            margin: 10px 0;
+            overflow-y: auto;
+            height: 300px;
+            position: fixed;
+            left: 10px;
+            top: 100px;
+            z-index: 10;
+        }
+        @media (max-width: 768px) {
+            header, section {
+                padding: 10px;
+            }
+            #monitoringContainer {
+                width: 100%;
+                padding: 15px;
+            }
+            .data-entry {
+                padding: 8px;
+                font-size: 14px;
+            }
+            #timeDisplay {
+                font-size: 18px;
+            }
+            section {
+                padding-left: 10px;
+            }
+        }
+        .risk-legend-container {
+            position: fixed;
+            left: 10px;
+            bottom: 10px;
+            background-color: #262626;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            color: white;
+            width: 250px;
+        }
+        .risk-legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .risk-indicator {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .low-risk { background-color: green; }
+        .moderate-risk { background-color: yellow; }
+        .high-risk { background-color: orange; }
+        .very-high-risk { background-color: red; }
+        .critical-risk { background-color: purple; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Dynamic Data Monitoring</h1>
+    </header>
+
+    <section>
+        <h2>Live Data Feed</h2>
+        <p>View real-time data from various sensors and monitoring devices on your site.</p>
+        
+        <button id="toggleDataButton">Toggle Data Display</button>
+
+        <div id="dataContainer"></div>
+
+        <div id="monitoringContainer">
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+
+        <div id="timeDisplay"></div>
+
+        <div id="warningContainer">
+            <h3>Risk Warning:</h3>
+            <p id="warningMessage"></p>
+        </div>
+    </section>
+
+    <div class="risk-legend-container">
+        <div class="risk-legend-item">
+            <div class="risk-indicator low-risk"></div>
+            <span>Low Risk (Stable)</span>
+        </div>
+        <div class="risk-legend-item">
+            <div class="risk-indicator moderate-risk"></div>
+            <span>Moderate Risk (Potentially Unstable)</span>
+        </div>
+        <div class="risk-legend-item">
+            <div class="risk-indicator high-risk"></div>
+            <span>High Risk (Significant Potential for Instability)</span>
+        </div>
+        <div class="risk-legend-item">
+            <div class="risk-indicator very-high-risk"></div>
+            <span>Very High Risk (Imminent Threat)</span>
+        </div>
+        <div class="risk-legend-item">
+            <div class="risk-indicator critical-risk"></div>
+            <span>Critical Risk (Immediate Danger)</span>
+        </div>
+    </div>
+
+    <div>
+    </div>
+
+    <script>
+        const mockData = [
+            {
+                "DATA": "Cohesion of Soil (kPa)",
+                "Value 1": 20,
+                "Unnamed: 2": 15,
+                "Unnamed: 3": 25,
+                "Unnamed: 4": 18,
+                "Unnamed: 5": 20
+            },
+            {
+                "DATA": "Normal Stress Potential Failure (kPa)",
+                "Value 1": 150,
+                "Unnamed: 2": 120,
+                "Unnamed: 3": 130,
+                "Unnamed: 4": 140,
+                "Unnamed: 5": 125
+            },
+            {
+                "DATA": "Friction Angle (º)",
+                "Value 1": "28º",
+                "Unnamed: 2": "15º",
+                "Unnamed: 3": "30º",
+                "Unnamed: 4": "26º",
+                "Unnamed: 5": "22º"
+            },
+            {
+                "DATA": "Weight of Soil (Mass per Unit Volume)",
+                "Value 1": 1500,
+                "Unnamed: 2": 1150,
+                "Unnamed: 3": null,
+                "Unnamed: 4": null,
+                "Unnamed: 5": null
+            },
+            {
+                "DATA": "Slope Angle",
+                "Value 1": "90º",
+                "Unnamed: 2": null,
+                "Unnamed: 3": null,
+                "Unnamed: 4": null,
+                "Unnamed: 5": null
+            },
+            {
+                "DATA": "External Loads",
+                "Value 1": 50,
+                "Unnamed: 2": 40,
+                "Unnamed: 3": 60,
+                "Unnamed: 4": 55,
+                "Unnamed: 5": 45
+            },
+            {
+                "DATA": "Inclination Angle",
+                "Value 1": 20,
+                "Unnamed: 2": 25,
+                "Unnamed: 3": 30,
+                "Unnamed: 4": 35,
+                "Unnamed: 5": 40
+            },
+            {
+                "DATA": "Water Pressure Load (kPa)",
+                "Value 1": 15,
+                "Unnamed: 2": 25,
+                "Unnamed: 3": 20,
+                "Unnamed: 4": 18,
+                "Unnamed: 5": 22
+            },
+            {
+                "DATA": "Height of Slope (Meters)",
+                "Value 1": 10,
+                "Unnamed: 2": 8,
+                "Unnamed: 3": 12,
+                "Unnamed: 4": 15,
+                "Unnamed: 5": 9
+            }
+        ];
+
+        let dynamicChartData = {
+            labels: mockData.map(item => item.DATA),
+            datasets: [{
+                label: 'Sample Data over Time',
+                data: mockData.map(item => item['Value 1']),
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        };
+
+        let myChart;
+
+        function displayData(data) {
+            const container = document.getElementById('dataContainer');
+            data.forEach(item => {
+                const entry = document.createElement('div');
+                entry.className = 'data-entry';
+                let innerHTML = `<strong>${item.DATA}</strong><br>`;
+                Object.keys(item).forEach(key => {
+                    if (key !== 'DATA') {
+                        innerHTML += `${key}: ${item[key] || 'N/A'}<br>`;
+                    }
+                });
+                entry.innerHTML = innerHTML;
+                container.appendChild(entry);
+            });
+        }
+
+        function createChart() {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            myChart = new Chart(ctx, {
+                type: 'line',
+                data: dynamicChartData,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function toggleDataVisibility() {
+            const container = document.getElementById('dataContainer');
+            container.style.display = container.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            const dateString = now.toLocaleDateString();
+            document.getElementById("timeDisplay").textContent = `Current Time: ${timeString}, Current Date: ${dateString}`;
+        }
+
+        function calculateRiskLevel(data) {
+            return "Low Risk"; // Placeholder, implement risk calculation logic here
+        }
+
+        function displayWarning(data) {
+            const warningContainer = document.getElementById('warningContainer');
+            const warningMessage = document.getElementById('warningMessage');
+            const riskLevel = calculateRiskLevel(data);
+
+            warningMessage.textContent = `Risk Level: ${riskLevel}`;
+            warningContainer.style.display = 'block';
+        }
+
+        // Function to update the chart with user input
+        function updateChart() {
+            const newValue = parseFloat(document.getElementById('dataValue').value);
+
+            if (!isNaN(newValue)) {
+                // Update the dynamicChartData object with the new value
+                dynamicChartData.datasets[0].data.push(newValue);
+
+                // Check for the warning condition and trigger the warning function
+                if (newValue > 100) {
+                    displayWarning(newValue);
+                }
+
+                // Update the chart
+                myChart.update();
+
+                // Clear the input field
+                document.getElementById('dataValue').value = '';
+            }
+        }
+
+        window.onload = function() {
+            updateTime();
+            setInterval(updateTime, 1000);
+            displayData(mockData);
+            createChart();
+        };
+
+    </script>
+</body>
+</html>
