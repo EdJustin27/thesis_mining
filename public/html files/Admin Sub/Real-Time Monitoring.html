@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Data Monitoring</title>
+    <!-- <link rel="stylesheet" href="path/to/your/css/style.css"> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1c1c1c;
+            color: #ff6600;
+            overflow: hidden;
+        }
+        header {
+            background-color: #ff6600;
+            color: #1c1c1c;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        section {
+            /* margin: 20px; */
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #monitoringContainer {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            width: 100%;
+            margin: auto;
+        }
+            #monitoringContainer #myChart{
+                background-color: white;
+            }
+        .data-entry {
+            background-color: #333;
+            color: #fff;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: left;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        #timeDisplay {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #ff6600;
+            text-align: center;
+        }
+        #toggleDataButton {
+            background-color: #ff6600;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        #dataContainer {
+            display: block;
+            background-color: #262626;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            max-width: 300px;
+            margin: 10px 0;
+            overflow-y: auto;
+            height: 300px;
+            position: fixed;
+            left: 10px;
+            top: 100px;
+            z-index: 10;
+        }
+        @media (max-width: 768px) {
+            header, section {
+                padding: 10px;
+            }
+            #monitoringContainer {
+                width: 1000px;
+                padding: 15px;
+            }
+            .data-entry {
+                padding: 8px;
+                font-size: 14px;
+            }
+            #timeDisplay {
+                font-size: 18px;
+            }
+            section {
+                padding-left: 10px;
+            }
+        }
+        .risk-legend-container {
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+            background-color: #26262602;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            color: white;
+            width: 250px;
+            
+        }
+        .risk-legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .risk-indicator {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .low-risk { background-color: green; }
+        .moderate-risk { background-color: yellow; }
+        .high-risk { background-color: orange; }
+        .very-high-risk { background-color: red; }
+        .critical-risk { background-color: purple; }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Dynamic Data Monitoring</h1>
+    </header>
+
+    <section>
+        <h2>Live Data Feed</h2>
+        <p>View real-time data from various sensors and monitoring devices on your site.</p>
+        
+
+        <div id="monitoringContainer">
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <div id="timeDisplay"></div>
+
+        <div id="warningContainer">
+            <h3>Risk Warning:</h3>
+            <p id="warningMessage"></p>
+        </div>
+    </section>
+
+    <div class="risk-legend-container">
+        <div class="risk-legend-item">
+            <div class="risk-indicator low-risk"></div>
+            <span>Low Risk (Stable)</span>
+        </div>
+        <div class="risk-legend-item">
+            <div class="risk-indicator moderate-risk"></div>
+            <span>Moderate Risk (Potentially Unstable)</span>
+        </div>
+        <div class="risk-legend-item">
+            <div class="risk-indicator high-risk"></div>
+            <span>High Risk (Significant Potential for Instability)</span>
+        </div>
+        <div class="risk-legend-item">
+            <div class="risk-indicator very-high-risk"></div>
+            <span>Very High Risk (Imminent Threat)</span>
+        </div>
+        <div class="risk-legend-item">
+            <div class="risk-indicator critical-risk"></div>
+            <span>Critical Risk (Immediate Danger)</span>
+        </div>
+    </div>
+
+    <script>
+        const constVar = {
+            cohesion: localStorage.getItem('cohesion'),
+            normalStress: localStorage.getItem('normalStress'),
+            frictionAngle: localStorage.getItem('frictionAngle'),
+            weightSoilNS: localStorage.getItem('weightSoilNS'),
+            heightSlope: localStorage.getItem('heightSlope'),
+            slopeAngle: localStorage.getItem('slopeAngle')
+        }
+        console.log(constVar)
+
+        // start for convertin radian into numerical
+        function getTanValue(angle){
+            function degreesToRadians(degrees) {
+                return degrees * (Math.PI / 180);
+            }
+            // Calculate the tangent of an angle in degrees
+            function tanAngle(degrees) {
+                var radians = degreesToRadians(degrees);
+                return Math.tan(radians).toFixed(3);
+            }
+            // return the numeric value
+            // console.log('tan value',tanAngle(angle))
+            return tanAngle(angle) * 1;
+        }
+        function getCosValue(angle){
+            function degreesToRadians(degrees) {
+                return degrees * (Math.PI / 180);
+            }
+            // Calculate the tangent of an angle in degrees
+            function cosAngle(degrees) {
+                var radians = degreesToRadians(degrees);
+                return Math.cos(radians).toFixed(3);
+            }
+            // return the numeric value
+            // console.log('cos value',cosAngle(angle))
+            return cosAngle(angle) * 1;
+        }
+        function getSinValue(angle){
+            function degreesToRadians(degrees) {
+                return degrees * (Math.PI / 180);
+            }
+            // Calculate the tangent of an angle in degrees
+            function sinAngle(degrees) {
+                var radians = degreesToRadians(degrees);
+                return Math.sin(radians).toFixed(3);
+            }
+            // return the numeric value
+            // console.log('sin value',sinAngle(angle))
+            return sinAngle(angle) * 1;
+        }
+
+
+        //initial data for starting the chart
+        var initialData = {
+            labels: ['start'],
+            datasets: [{
+                label: 'Monitorin System',
+                data: [0.5],
+                borderWidth: .5
+            }]
+        };
+
+        // Create the initial chart
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: initialData,
+            options: {
+                animations: {
+                tension: {
+                    duration: 500,
+                    easing: 'linear',
+                    from: 1,
+                    to: 0,
+                    loop: true
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    },
+                    x: {
+                        min: 0,
+                        max: 10
+                    }
+                }
+            }
+        });
+
+        // Function to add new data and update the chart
+        function addData() {
+            // const numerator = constVar.cohesion + (constVar.normalStress * getTanValue(constVar.frictionAngle))
+            // const denominator = ( constVar.weightSoilNS * getSinValue(constVar.slopeAngle) ) + ( item.externalLoads * getCosValue(item.inclinationAngle) ) + ( item.waterPressure * getCosValue(item.inclinationAngle) * constVar.slopeAngle )
+            // const fos = numerator/denominator
+            const externalLoads = Math.random() * (60 - 40) + 40
+            const waterPressure = Math.random() * (25 - 15) + 15
+            const inclinationAngle = Math.random() * (40 - 20) + 20
+            const numerator = constVar.cohesion + (constVar.normalStress * getTanValue(constVar.frictionAngle))
+            const denominator = ( constVar.weightSoilNS * getSinValue(constVar.slopeAngle) ) + ( externalLoads * getCosValue(inclinationAngle) ) + ( waterPressure * getCosValue(inclinationAngle) * constVar.slopeAngle )
+            const fos = numerator/denominator
+            
+
+            //check if the record exceeds 7 records remove the first index
+            const length = myChart.data.datasets[0].data.length
+            if(length>7){
+                myChart.data.labels.splice(0,1)
+                myChart.data.datasets[0].data.splice(0,1)
+            }
+
+            //gett he current time
+            var currentDate = new Date();
+            var currentHour = currentDate.getHours();
+            var currentMinute = currentDate.getMinutes();
+            var currentSecond = currentDate.getSeconds();
+            const time = currentHour + ':' + currentMinute + ':' + currentSecond
+
+            //push the labels and data
+            myChart.data.labels.push(time);
+            myChart.data.datasets[0].data.push(fos);
+
+            if(fos > 0.7){
+                displayWarning("High")
+            }else{
+                displayWarning("Low")
+            }
+
+            myChart.update(); 
+            // Update the chart to reflect the new data
+        }
+
+        // Example: Add new data every second
+        setInterval(addData, 1000);
+
+
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            const dateString = now.toLocaleDateString();
+            document.getElementById("timeDisplay").textContent = `Current Time: ${timeString}, Current Date: ${dateString}`;
+        }
+
+        function calculateRiskLevel(data) {
+            return data;
+        }
+
+        function displayWarning(data) {
+            console.log('critical!')
+            const warningContainer = document.getElementById('warningContainer');
+            const warningMessage = document.getElementById('warningMessage');
+            const riskLevel = calculateRiskLevel(data);
+
+            warningMessage.textContent = `Risk Level: ${riskLevel}`;
+            warningContainer.style.display = 'block';
+        }
+
+        window.onload = function() {
+            updateTime();
+            setInterval(updateTime, 1000);
+            // displayData(mockData);
+            createChart();
+        };
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation Control</title>
+    <link rel="stylesheet" href='../../css/style sa suimulation control.css'> <!-- Update the path as needed -->
+</head>
+<body>
+    <header>
+        <h1>Simulation Control</h1>
+    </header>
+
+    <div class="container">
+        <section id="formulaSection" class="box">
+            <h2>Formula Put Here</h2>
+            <!-- Placeholder for formula -->
+        </section>
+
+        <section id="parameterInputs" class="box">
+            <h2>Simulation Parameters</h2>
+            <form id="constantParameters">
+                <div class="input-group">
+                    <label for="cohesionInput">Cohesion of Soil (kPa)</label>
+                    <input type="number" id="cohesionInput" value="20">
+                </div>
+                <div class="input-group">
+                    <label for="normalStressInput">Normal Stress</label>
+                    <input type="number" id="normalStressInput" value="150">
+                </div>
+                <div class="input-group">
+                    <label for="frictionAngleInput">Friction Angle</label>
+                    <input type="number" id="frictionAngleInput" value="28">
+                </div>
+                <div class="input-group">
+                    <label for="weightSoilNS">Weight of Soil (NS)</label>
+                    <input type="number" id="weightSoilNS" value="1500">
+                </div>
+                <div class="input-group">
+                    <label for="weightSoilDS">Height of Slope</label>
+                    <input type="number" id="heightSlope" value="10">
+                </div>
+                <div class="input-group">
+                    <label for="slopeAngleInput">Slope Angle</label>
+                    <input type="number" id="slopeAngleInput" value="90">
+                </div>
+                <button id="fixEditButton" type="submit">Fix/Edit</button>             
+            </form>
+    </section>
+    
+</section>
+    <script src="../../js/constant.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help, Feedback & Support</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        section {
+            background-color: white;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label, textarea, button {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        textarea {
+            height: 100px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Help, Feedback & Support</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Help</h2>
+            <p>Need assistance? Here are some resources to help you:</p>
+            <ul>
+                <li><a href="#">Frequently Asked Questions</a></li>
+                <li><a href="#">User Guides</a></li>
+                <li><a href="#">Video Tutorials</a></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Feedback</h2>
+            <p>We value your feedback. Share your thoughts with us:</p>
+            <form id="feedbackForm" method="post">
+                <label for="question">Your Question:</label>
+                <textarea id="question" name="question" rows="4" cols="50"></textarea>
+                <br>
+                <button type="submit">Submit Question</button>
+            </form>
+            <form id="feedbackForm" method="post" action="C:/xampp/htdocs/files/submit_question.php">
+        </section>
+
+        <section>
+            <h2>Support</h2>
+            <p>If you encounter issues, reach out to our support team:</p>
+            <p>Email: support@example.com</p>
+            <p>Phone: +1 (555) 123-4567</p>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+
+fetch('http://localhost/files/submit_question.php', {
+    method: 'POST',
+    body: formData
+})
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('feedbackMessage').innerHTML = data;
+                document.getElementById('question').value = '';
+            })
+            .catch(error => {
+                document.getElementById('feedbackMessage').innerHTML = "Error submitting question";
+            });
+        });
+    </script>
+</body>
+</html>
