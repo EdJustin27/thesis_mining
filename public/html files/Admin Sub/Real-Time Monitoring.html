@@ -4,156 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Data Monitoring</title>
-    <!-- <link rel="stylesheet" href="path/to/your/css/style.css"> -->
+    <link rel="stylesheet" href=".../../../../css/realTimeMonitoring.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #1c1c1c;
-            color: #ff6600;
-            overflow: hidden;
-        }
-        header {
-            background-color: #ff6600;
-            color: #1c1c1c;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-        }
-        section {
-            /* margin: 20px; */
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        #monitoringContainer {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            max-width: 600px;
-            width: 100%;
-            margin: auto;
-        }
-            #monitoringContainer #myChart{
-                background-color: white;
-            }
-        .data-entry {
-            background-color: #333;
-            color: #fff;
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: left;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        #timeDisplay {
-            margin-top: 20px;
-            font-size: 20px;
-            color: #ff6600;
-            text-align: center;
-        }
-        #toggleDataButton {
-            background-color: #ff6600;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 10px;
-        }
-        #dataContainer {
-            display: block;
-            background-color: #262626;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            max-width: 300px;
-            margin: 10px 0;
-            overflow-y: auto;
-            height: 300px;
-            position: fixed;
-            left: 10px;
-            top: 100px;
-            z-index: 10;
-        }
-        @media (max-width: 768px) {
-            header, section {
-                padding: 10px;
-            }
-            #monitoringContainer {
-                width: 1000px;
-                padding: 15px;
-            }
-            .data-entry {
-                padding: 8px;
-                font-size: 14px;
-            }
-            #timeDisplay {
-                font-size: 18px;
-            }
-            section {
-                padding-left: 10px;
-            }
-        }
-        .risk-legend-container {
-            position: absolute;
-            left: 10px;
-            bottom: 10px;
-            background-color: #26262602;
-            padding: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            color: white;
-            width: 250px;
-            
-        }
-        .risk-legend-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 5px;
-        }
-        .risk-indicator {
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-        .low-risk { background-color: green; }
-        .moderate-risk { background-color: yellow; }
-        .high-risk { background-color: orange; }
-        .very-high-risk { background-color: red; }
-        .critical-risk { background-color: purple; }
-
-
-    </style>
+    <link rel="stylesheet" href="../../css/bell.css">
 </head>
 <body>
-    <header>
+    <section id="notification">
+        <img src="../../assets/bell.png">
+        <h2 id="notifCount">0</h2>
+        <ul id="notifList">
+        </ul>
+    </section>
+    <header id="header">
         <h1>Dynamic Data Monitoring</h1>
     </header>
 
-    <section>
-        <h2>Live Data Feed</h2>
-        <p>View real-time data from various sensors and monitoring devices on your site.</p>
-        
+    <main id="body">
+        <!-- history -->
+        <section id="history">
+            <h2>History</h2>
+            <ul id="historyList">
+            </ul>
+        </section>
 
-        <div id="monitoringContainer">
-            <canvas id="myChart"></canvas>
-        </div>
+        <!-- chart -->
+        <section id="main">
+            <h2>Live Data Feed</h2>
+            <p>View real-time data from various sensors and monitoring devices on your site.</p>
+            
 
-        <div id="timeDisplay"></div>
+            <div id="monitoringContainer">
+                <canvas id="myChart"></canvas>
+            </div>
 
-        <div id="warningContainer">
-            <h3>Risk Warning:</h3>
-            <p id="warningMessage"></p>
-        </div>
-    </section>
+            <div id="timeDisplay"></div>
 
-    <div class="risk-legend-container">
+            <div id="warningContainer">
+                <h3>Risk Warning:</h3>
+                <p id="warningMessage"></p>
+            </div>
+        </section>        
+    </main>
+
+    
+
+    <!-- absolute box -->
+    <div id="risk-legend-container">
         <div class="risk-legend-item">
             <div class="risk-indicator low-risk"></div>
             <span>Low Risk (Stable)</span>
@@ -176,7 +72,10 @@
         </div>
     </div>
 
-    <script>
+    <script> 
+        const myArray = [];
+        localStorage.setItem('notifications', JSON.stringify(myArray));     //instantiate the notification var at the local storage
+        const history = [];
         const constVar = {
             cohesion: localStorage.getItem('cohesion'),
             normalStress: localStorage.getItem('normalStress'),
@@ -233,9 +132,11 @@
         var initialData = {
             labels: ['start'],
             datasets: [{
-                label: 'Monitorin System',
+                label: 'Monitoring System',
                 data: [0.5],
-                borderWidth: .5
+                borderWidth: .5,
+                borderColor: 'blue',
+                backgroundColor: 'blue'
             }]
         };
 
@@ -247,8 +148,8 @@
             options: {
                 animations: {
                 tension: {
-                    duration: 500,
-                    easing: 'linear',
+                    // duration: 2000,
+                    // easing: 'linear',
                     from: 1,
                     to: 0,
                     loop: true
@@ -260,56 +161,149 @@
                     },
                     x: {
                         min: 0,
-                        max: 10
+                        max: 20
+                    }
+                },
+                plugins: {
+                    // Add a custom plugin to draw a horizontal line at y = 1
+                    drawHorizontalLine: {
+                        yValue: 1,
+                        borderColor: 'red', // Customize the line color
+                        borderWidth: 2,     // Customize the line width
                     }
                 }
             }
         });
 
+        //counter to record the counts
+        let criteria = {
+            lowRisk : 0,
+            moderateRisk : 0,
+            highRisk : 0,
+            veryHighRisk : 0,
+            critical : 0  
+        }
+
+
         // Function to add new data and update the chart
-        function addData() {
+        async function addData() {
+
+            //fetch data here...
             // const numerator = constVar.cohesion + (constVar.normalStress * getTanValue(constVar.frictionAngle))
             // const denominator = ( constVar.weightSoilNS * getSinValue(constVar.slopeAngle) ) + ( item.externalLoads * getCosValue(item.inclinationAngle) ) + ( item.waterPressure * getCosValue(item.inclinationAngle) * constVar.slopeAngle )
-            // const fos = numerator/denominator
-            const externalLoads = Math.random() * (60 - 40) + 40
-            const waterPressure = Math.random() * (25 - 15) + 15
-            const inclinationAngle = Math.random() * (40 - 20) + 20
+            // const fos = numerator/denominator 
+            const externalLoads = (Math.random() * 100).toFixed(3)
+            const waterPressure = (Math.random() * 100).toFixed(3)
+            const inclinationAngle = (Math.random() * 100).toFixed(3)
+            const data = {
+                externalLoads,
+                waterPressure,
+                inclinationAngle
+            }
+            history.push(data)
+
+            // compute the fos
             const numerator = constVar.cohesion + (constVar.normalStress * getTanValue(constVar.frictionAngle))
             const denominator = ( constVar.weightSoilNS * getSinValue(constVar.slopeAngle) ) + ( externalLoads * getCosValue(inclinationAngle) ) + ( waterPressure * getCosValue(inclinationAngle) * constVar.slopeAngle )
-            const fos = numerator/denominator
+            const fos = (numerator/denominator).toFixed(3)
             
+            //gett the current time
+            var currentDate = new Date();
+            var currentHour = currentDate.getHours();
+            var currentMinute = currentDate.getMinutes().toString().padStart(2, '0');
+            var currentSecond = currentDate.getSeconds().toString().padStart(2, '0');
+            const time = currentHour + ':' + currentMinute + ':' + currentSecond
+
+            // update the history UI realtime
+            const historyList = document.getElementById('historyList')
+            historyList.insertAdjacentHTML('afterbegin',
+                `<li> 
+                    <p>TIME: ${time}</p>
+                    <p>External Loads: ${data.externalLoads}</p>
+                    <p>Water Pressure: ${data.waterPressure}</p>
+                    <p>Inclination Angle: ${data.inclinationAngle}</p>
+                    <p>FOS : ${fos}</p>
+                </li>`
+            );
 
             //check if the record exceeds 7 records remove the first index
             const length = myChart.data.datasets[0].data.length
-            if(length>7){
+            if(length>15){
                 myChart.data.labels.splice(0,1)
                 myChart.data.datasets[0].data.splice(0,1)
             }
-
-            //gett he current time
-            var currentDate = new Date();
-            var currentHour = currentDate.getHours();
-            var currentMinute = currentDate.getMinutes();
-            var currentSecond = currentDate.getSeconds();
-            const time = currentHour + ':' + currentMinute + ':' + currentSecond
 
             //push the labels and data
             myChart.data.labels.push(time);
             myChart.data.datasets[0].data.push(fos);
 
-            if(fos > 0.7){
-                displayWarning("High")
+            let label = '';   //var holder for the label of notification
+            let code = '';    //var holder for the color coding of the category
+            const section = document.getElementById('main')
+            section.classList = []
+            if( 0 <= fos && fos <= 0.5){
+                displayWarning("stable")
+                section.classList.add('low-risk')
+                section.style.color = "white"
+                label = 'low risk'
+                code = 'green'
+                criteria.lowRisk++
+            }else if(0.5 < fos && fos <= 0.95){
+                displayWarning("potentially unstable")
+                section.classList.add('moderate-risk')
+                section.style.color = "black"
+                label = 'moderate risk'
+                code = 'yellow'
+                criteria.moderateRisk++
+            }else if( 0.95 < fos && fos <= 1.05){
+                displayWarning("significant potential for instability")
+                section.classList.add('high-risk')
+                section.style.color = "red"
+                label = 'hight risk'
+                code = 'orange'
+                criteria.highRisk++
+            }else if( 1.05 < fos && fos <= 1.5){
+                displayWarning("imminent threat")
+                section.classList.add('very-high-risk')
+                section.style.color = "white"
+                label = 'very high risk'
+                code = 'red'
+                criteria.veryHighRisk++
             }else{
-                displayWarning("Low")
+                displayWarning("immediate danger")
+                section.classList.add('critical-risk')
+                label = 'immediate danger'
+                code = 'purple'
+                criteria.critical++
             }
 
-            myChart.update(); 
             // Update the chart to reflect the new data
+            myChart.update(); 
+      
+
+            const jsonString = localStorage.getItem('notifications');   //get the array and it is string
+            const parsedArray = jsonString ? JSON.parse(jsonString) : [];   //converted the string into an array
+            // remove the first index if the lenght of the array exceeds 5
+            if(parsedArray.length > 20){
+                parsedArray.splice(0,1)
+            }
+
+            // set the result in the local storage
+            if(fos >= 0.8){
+                // console.log(fos)
+                // console.log(label,code)      
+                parsedArray.push({label,code});
+                localStorage.setItem('notifications', JSON.stringify(parsedArray));
+            }
+
+            // set the criteria record to the local storage
+
+            localStorage.setItem('criteria', JSON.stringify(criteria))
+            
         }
 
         // Example: Add new data every second
         setInterval(addData, 1000);
-
 
         function updateTime() {
             const now = new Date();
@@ -318,27 +312,22 @@
             document.getElementById("timeDisplay").textContent = `Current Time: ${timeString}, Current Date: ${dateString}`;
         }
 
-        function calculateRiskLevel(data) {
-            return data;
-        }
 
-        function displayWarning(data) {
-            console.log('critical!')
+        function displayWarning(data){
             const warningContainer = document.getElementById('warningContainer');
             const warningMessage = document.getElementById('warningMessage');
-            const riskLevel = calculateRiskLevel(data);
 
-            warningMessage.textContent = `Risk Level: ${riskLevel}`;
-            warningContainer.style.display = 'block';
+            warningMessage.textContent = `Risk Level: ${data}`;
+            warningMessage.style.textTransform = 'Capitalize'
+            warningContainer.style.display = 'block';        
         }
 
         window.onload = function() {
             updateTime();
-            setInterval(updateTime, 1000);
-            // displayData(mockData);
-            createChart();
+            setInterval(updateTime, 3000);
         };
 
     </script>
+    <script src="../../js/bell.js"></script>
 </body>
 </html>

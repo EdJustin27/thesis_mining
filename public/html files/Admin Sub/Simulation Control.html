@@ -4,14 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulation Control</title>
-    <link rel="stylesheet" href='../../css/style sa suimulation control.css'> <!-- Update the path as needed -->
+    <link rel="stylesheet" href='../../css/style sa suimulation control.css'>
+    <link rel="stylesheet" href="../../css/bell.css">
 </head>
 <body>
-    <header>
+    <section id="notification">
+        <img src="../../assets/bell.png">
+        <h2 id="notifCount">0</h2>
+        <ul id="notifList">
+        </ul>
+    </section>
+    <header id="header">
         <h1>Simulation Control</h1>
     </header>
 
-    <div class="container">
+    <div id="body" class="container">
         <section id="formulaSection" class="box">
             <h2>Formula Put Here</h2>
             <!-- Placeholder for formula -->
@@ -50,5 +57,6 @@
     
 </section>
     <script src="../../js/constant.js"></script>
+    <script src="../../js/bell.js"></script>
 </body>
 </html>

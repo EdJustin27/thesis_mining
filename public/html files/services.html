@@ -5,13 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SVC's Services</title>
     <link rel="stylesheet" href="../css/STYLE SA SERVICES.css">
+    <link rel="stylesheet" href="../css/bell.css">
 </head>
 <body>
-    <header>
+    <section id="notification">
+        <img src="../assets/bell.png">
+        <h2 id="notifCount">0</h2>
+        <ul id="notifList">
+        </ul>
+    </section>
+    <header id="header">
         <h1>SVC's Services</h1>
     </header>
 
-    <div class="services-container">
+    <div id="body" class="services-container">
         <!-- Service 1 -->
         <div class="service">
             <h2>Continuous Monitoring</h2>
@@ -60,5 +67,6 @@
             <p>Ensure the safety and stability of your project with our state-of-the-art real-time monitoring services. Contact us to discuss how we can customize a solution for your specific needs.</p>
         </div>
     </div>
+    <script src="../js/bell.js"></script>
 </body>
 </html>

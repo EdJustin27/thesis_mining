@@ -1,0 +1,124 @@
+*{
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1c1c1c;
+    color: #ff6600;
+    overflow: scroll;
+}
+header {
+    background-color: #ff6600;
+    color: #1c1c1c;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+main{
+    display: flex;
+}
+#history,
+#main{
+    display: inline-block;
+    vertical-align: top;
+    height: 86.2vh;
+}
+#history{
+    display: inline-block;
+    width: 400px;
+    text-align: center;
+    padding: 2rem;
+}
+    #history ul{
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        overflow-y: auto;
+        max-height: 90%;
+        padding-right: 1rem;
+    }   
+        #history ul::-webkit-scrollbar {
+            width: 12px;
+        }
+        
+        #history ul::-webkit-scrollbar-thumb {
+            background-color: #3498db;
+            border-radius: 12px;
+        }
+        
+        #history ul::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+            border-radius: 12px;
+        }
+        #history ul li{
+            border: 1px solid white;
+            padding: .5rem;
+            margin-bottom: .5rem;
+            border-radius: 1rem;
+        }
+            #history ul li p{
+                padding: 0;
+                margin: 0;
+                margin-bottom: .2rem;
+            }
+#main{
+    /* margin: 20px; */
+    margin: 0;
+    padding-top: 2rem;
+    text-align: center;
+    transition: all .5s ease-in;
+    color: white;
+    display: inline-block;
+    /* width: 300px; */
+    flex-grow: 1;
+}
+    #main #monitoringContainer {
+        border: 1px dotted black;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        width: 55rem;
+        margin: auto;
+        display: inline-block;
+    }
+        #monitoringContainer #myChart{
+            background-color: white;
+        }
+#timeDisplay {
+    margin-top: 20px;
+    font-size: 20px;
+    color: #ff6600;
+    text-align: center;
+}
+#risk-legend-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 1rem;
+    background-color: rgba(14, 14, 14, 0.667);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: white;
+    width: 220px;
+    font-size: xx-small;
+}
+.risk-legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.risk-indicator {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.low-risk { background-color: green; }
+.moderate-risk { background-color: yellow; }
+.high-risk { background-color: orange; }
+.very-high-risk { background-color: red; }
+.critical-risk { background-color: purple; }

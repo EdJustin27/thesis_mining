@@ -4,45 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
-    <link rel="stylesheet" href="../css/style sa contact us.css"> <!-- Ensure the CSS file path is correct -->
+    <link rel="stylesheet" href="../css/style sa contact us.css">
+    <link rel="stylesheet" href="../css/bell.css">
 </head>
 <body>
-    <header>
+    <section id="notification">
+        <img src="../assets/bell.png">
+        <h2 id="notifCount">0</h2>
+        <ul id="notifList">
+        </ul>
+    </section>
+    <header id="header">
         <h1>Contact Us</h1>
         <p>Thank you for your interest in our services! Feel free to reach out to us for any inquiries or collaboration opportunities.</p>
     </header>
 
-    <section class="contact-info">
-        <p><strong>Email:</strong> <a href="mailto:svc_csu@gmail.com">svc_csu@gmail.com</a></p>
-        <p><strong>Phone:</strong> <a href="tel:+63123456789">+63123456789</a></p>
-    </section>
+    <div id="body"> 
+        <section class="contact-info">
+            <p><strong>Email:</strong> <a href="mailto:svc_csu@gmail.com">svc_csu@gmail.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+63123456789">+63123456789</a></p>
+        </section>
 
-    <section class="contact-form">
-        <h2>Contact Form</h2>
-        <form id="contactUsForm">
-            <input type="text" id="name" name="name" placeholder="Your Name" required>
-            <input type="email" id="email" name="email" placeholder="Your Email" required>
-            <input type="text" id="subject" name="subject" placeholder="Subject" required>
-            <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
+        <section class="contact-form">
+            <h2>Contact Form</h2>
+            <form id="contactUsForm">
+                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
 
-    <section class="response-time">
-        <p>We aim to respond within business hours/days.</p>
-    </section>
+        <section class="response-time">
+            <p>We aim to respond within business hours/days.</p>
+        </section>
 
-    <footer>
-        <h2>Connect with Us</h2>
-        <!-- Replace # with the actual links to your social media profiles -->
-        <a href="#">Facebook</a>
-        <a href="#">Twitter</a>
-        <a href="#">LinkedIn</a>
-        <!-- Add other social media links as necessary -->
-    </footer>
+        <footer>
+            <h2>Connect with Us</h2>
+            <!-- Replace # with the actual links to your social media profiles -->
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">LinkedIn</a>
+            <!-- Add other social media links as necessary -->
+        </footer>        
+    </div>
+   
 
-    <script>
-        // Add any JavaScript required for form handling or interactivity
-    </script>
+    <script src="../js/bell.js"></script>
 </body>
 </html>

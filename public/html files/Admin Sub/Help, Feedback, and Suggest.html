@@ -60,13 +60,20 @@
             background-color: #45a049;
         }
     </style>
+    <link rel="stylesheet" href="../../css/bell.css">
 </head>
 <body>
-    <header>
+    <section id="notification">
+        <img src="../../assets/bell.png">
+        <h2 id="notifCount">0</h2>
+        <ul id="notifList">
+        </ul>
+    </section>
+    <header id="header">
         <h1>Help, Feedback & Support</h1>
     </header>
 
-    <main>
+    <main id="body">
         <section>
             <h2>Help</h2>
             <p>Need assistance? Here are some resources to help you:</p>
@@ -102,10 +109,10 @@
             event.preventDefault();
             var formData = new FormData(this);
 
-fetch('http://localhost/files/submit_question.php', {
-    method: 'POST',
-    body: formData
-})
+            fetch('http://localhost/files/submit_question.php', {
+                method: 'POST',
+                body: formData
+            })
             .then(response => response.text())
             .then(data => {
                 document.getElementById('feedbackMessage').innerHTML = data;
@@ -116,5 +123,6 @@ fetch('http://localhost/files/submit_question.php', {
             });
         });
     </script>
+    <script src="../../js/bell.js"></script>
 </body>
 </html>
