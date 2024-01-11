@@ -1,4 +1,5 @@
 ﻿body {
+
     font-family: Arial, sans-serif;
     /* background-image: url('file:///C:/Users/abugf/Downloads/403612321_252529494172201_1643041307176863918_n.jpg'); */
     background-size: cover;
@@ -25,6 +26,11 @@ header {
     top: 0;
     z-index: 2;
 }
+    header a{
+        text-decoration: none;
+        color: white;
+        font-size: 1rem;
+    }
 
 .description, .combined-container {
     background-color: rgba(140, 115, 91, 0.7);

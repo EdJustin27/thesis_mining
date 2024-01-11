@@ -7,6 +7,41 @@
     <link rel="stylesheet" href=".../../../../css/realTimeMonitoring.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="../../css/bell.css">
+    <link rel="stylesheet" href="../../css/headerNavBtns.css">
+    <style>        
+        main#analytics{
+        text-align: center;
+        }
+            main#analytics div{
+                display: flex;
+                justify-content: center;
+            }
+            main#analytics ul,
+            main#analytics section{
+                width: 35%;
+                /* border: 1px dotted white; */
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+                main#analytics section{
+                    padding: 0 1rem;
+                }
+                    main#analytics section p{
+                        line-height: 1.5rem;
+                        color: white;
+                        text-transform: capitalize;
+                    }
+                main#analytics ul li{
+                    display: block;
+                    width: 100%;
+                    text-align: start;
+                    padding-left: 7rem;
+                }
+                    main#analytics ul li h4{
+                        display: inline-block;
+                        margin-right: .5rem;
+                    }
+    </style>
 </head>
 <body>
     <section id="notification">
@@ -17,9 +52,16 @@
     </section>
     <header id="header">
         <h1>Dynamic Data Monitoring</h1>
+        <nav>
+            <a href='./Simulation Control.html'>Simulation Control</a>
+            <a href='./Real-Time Monitoring.html'>Real-time Monitoring</a>
+            <a href='#analytics'>Analysis Tools & Alerts</a>
+            <a href='./MineSite History.html'>Mine Site History</a>
+            <a href='./Help, Feedback, and Suggest.html'>Help, Feedback, & Support</a>
+        </nav>
     </header>
 
-    <main id="body">
+    <main id="body" class="monitoring">
         <!-- history -->
         <section id="history">
             <h2>History</h2>
@@ -43,7 +85,35 @@
                 <h3>Risk Warning:</h3>
                 <p id="warningMessage"></p>
             </div>
-        </section>        
+        </section>       
+    </main>
+
+    <!-- ANALYTICS -->
+    <main id="analytics">
+        <header id="header">
+            <h1>Analysis Tools & Alerts</h1>
+        </header>
+        
+        <!-- <div class="bar-container">
+            <canvas id="analysis"></canvas>
+        </div> -->
+        
+        <div>
+            <ul>
+                <h2>Criterias</h2>
+                <li><h4>Low Risk:</h4>Stable</li>
+                <li><h4>Medium Risk:</h4>Potentially Unstable</li>
+                <li><h4>High Risk:</h4>Significant Potential for Instability</li>
+                <li><h4>Very High Risk:</h4>Immenent Threat</li>
+                <li><h4>Critical:</h4>Immediate Danger</li>
+            </ul>
+
+            <section>
+                <h2>Management: </h2>
+                <p id="managementText"></p>
+            </section>            
+        </div>
+
     </main>
 
     
@@ -237,6 +307,7 @@
             myChart.data.labels.push(time);
             myChart.data.datasets[0].data.push(fos);
 
+            let text = '';      //var holder for the management display text
             let label = '';   //var holder for the label of notification
             let code = '';    //var holder for the color coding of the category
             const section = document.getElementById('main')
@@ -248,6 +319,7 @@
                 label = 'low risk'
                 code = 'green'
                 criteria.lowRisk++
+                text = 'Routine monitoring may be sufficient.'
             }else if(0.5 < fos && fos <= 0.95){
                 displayWarning("potentially unstable")
                 section.classList.add('moderate-risk')
@@ -255,6 +327,7 @@
                 label = 'moderate risk'
                 code = 'yellow'
                 criteria.moderateRisk++
+                text = 'Implement monitoring and mitigation measures; periodic assessments.'
             }else if( 0.95 < fos && fos <= 1.05){
                 displayWarning("significant potential for instability")
                 section.classList.add('high-risk')
@@ -262,6 +335,7 @@
                 label = 'hight risk'
                 code = 'orange'
                 criteria.highRisk++
+                text = 'Implement intensive monitoring, conduct detailed stability analysis, and consider engineering solutions or restrictions on land use.'
             }else if( 1.05 < fos && fos <= 1.5){
                 displayWarning("imminent threat")
                 section.classList.add('very-high-risk')
@@ -269,12 +343,14 @@
                 label = 'very high risk'
                 code = 'red'
                 criteria.veryHighRisk++
+                text = 'Emergency measures, evacuation plans, and immediate engineering interventions.'
             }else{
                 displayWarning("immediate danger")
                 section.classList.add('critical-risk')
                 label = 'immediate danger'
                 code = 'purple'
                 criteria.critical++
+                text = 'Emergency response, evacuation, and immediate engineering interventions to stabilize or mitigate the slope.'
             }
 
             // Update the chart to reflect the new data
@@ -289,16 +365,16 @@
             }
 
             // set the result in the local storage
-            if(fos >= 0.8){
-                // console.log(fos)
-                // console.log(label,code)      
+            if(fos >= 0.8){     
                 parsedArray.push({label,code});
                 localStorage.setItem('notifications', JSON.stringify(parsedArray));
             }
 
             // set the criteria record to the local storage
-
             localStorage.setItem('criteria', JSON.stringify(criteria))
+
+            const paragraph = document.getElementById('managementText')
+            paragraph.textContent = `${label} (${code}) : ${text}`
             
         }
 

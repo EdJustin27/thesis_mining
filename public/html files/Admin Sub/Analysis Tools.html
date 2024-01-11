@@ -13,22 +13,23 @@
             background-color: #1c1c1c;
             color: #ff6600;
         }
-        header {
+        header{
             background-color: #333;
             color: #fff;
-            padding: 15px;
+            padding: 25px;
             text-align: center;
         }
-        canvas {
-            margin: 1rem;
-            width: 500px;
-            display: inline-block;
-            vertical-align: middle;
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 1rem;
+        main{
+            text-align: center;
         }
+            main .graph-container,ul{
+                display: inline-block;
+                vertical-align: top;
+                margin-top: 2rem;
+                width: 45vw;
+                border: 1px dotted white;
+            }
+
         .low-risk { background-color: green; }
         .moderate-risk { background-color: yellow; }
         .high-risk { background-color: orange; }
@@ -44,17 +45,34 @@
         <ul id="notifList">
         </ul>
     </section>
-    <header id="header">
+    <!-- <header id="header">
         <h1>Analysis Tools & Alerts</h1>
     </header>
     
     <main id="body">
-        <canvas id="analysis"></canvas>
-    </main>
+        
+        <div class="graph-container">
+            <canvas id="analysis"></canvas>
+        </div>
+        
+        
+        <ul>
+            <h3>Criterias</h3>
+            <li><h4>Low Risk:</h4>Stable</li>
+            <li><h4>Medium Risk:</h4>Potentially Unstable</li>
+            <li><h4>High Risk:</h4>Significant Potential for Instability</li>
+            <li><h4>Very High Risk:</h4>Immenent Threat</li>
+            <li><h4>Critical:</h4>Immediate Danger</li>
+        </ul>
+
+        <section>
+            Management: 
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores id possimus totam iure esse culpa aspernatur reprehenderit quo cupiditate, aliquid provident magni sed! Ut laborum eius eaque quo asperiores.</p>
+        </section>
+    </main> -->
     
 
     <script>
-
         let emptyCriteria = {
             lowRisk : 0,
             moderateRisk : 0,
@@ -89,7 +107,6 @@
             }
         });
         
-
         window.onload = function() {
             
         };
