@@ -18,18 +18,19 @@ header {
 }
 main.monitoring{
     display: flex;
+    justify-content: space-around;
 }
 #history,
 #main{
     display: inline-block;
     vertical-align: top;
-    height: 86.2vh;
+    height: 100vh;
 }
 #history{
     display: inline-block;
-    width: 400px;
+    /* width: 400px; */
     text-align: center;
-    padding: 2rem;
+    padding: 1rem;
 }
     #history ul{
         padding: 0;
@@ -37,14 +38,15 @@ main.monitoring{
         list-style: none;
         overflow-y: auto;
         max-height: 90%;
-        padding-right: 1rem;
+        /* padding-right: 1rem; */
     }   
         #history ul::-webkit-scrollbar {
             width: 12px;
+            padding-left: 1rem;
         }
         
         #history ul::-webkit-scrollbar-thumb {
-            background-color: #3498db;
+            background-color: #6d777e;
             border-radius: 12px;
         }
         
@@ -55,8 +57,9 @@ main.monitoring{
         #history ul li{
             border: 1px solid white;
             padding: .5rem;
-            margin-bottom: .5rem;
+            margin: .2rem .5rem;
             border-radius: 1rem;
+            font-size: .8rem;
         }
             #history ul li p{
                 padding: 0;
@@ -66,7 +69,7 @@ main.monitoring{
 #main{
     /* margin: 20px; */
     margin: 0;
-    padding-top: 2rem;
+    padding-top: 1rem;
     text-align: center;
     transition: all .5s ease-in;
     color: white;
@@ -94,7 +97,8 @@ main.monitoring{
     text-align: center;
 }
 #risk-legend-container {
-    position: absolute;
+    display: inline-block;
+    /* position: absolute; */
     bottom: 0;
     right: 0;
     margin: 1rem;
@@ -107,9 +111,21 @@ main.monitoring{
     font-size: xx-small;
 }
 .risk-legend-item {
-    display: flex;
+    /* display: flex; */
     align-items: center;
     margin-bottom: 5px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+.risk-legend-item div{
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: .5rem;
+}
+.risk-legend-item  span{
+    line-height: 1.5rem;
 }
 .risk-indicator {
     width: 15px;
@@ -122,3 +138,45 @@ main.monitoring{
 .high-risk { background-color: orange; }
 .very-high-risk { background-color: red; }
 .critical-risk { background-color: purple; }
+
+#timeDisplay{
+    color: gray;
+    text-shadow: 0 1px 1px black;
+}
+#warningContainer{
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+main#analytics{
+    text-align: center;
+    }
+        main#analytics div{
+            display: flex;
+            justify-content: center;
+        }
+        main#analytics ul,
+        main#analytics section{
+            width: 35%;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+            main#analytics section{
+                padding: 0 1rem;
+            }
+                main#analytics section p{
+                    line-height: 1.5rem;
+                    color: white;
+                    text-transform: capitalize;
+                }
+            main#analytics ul li{
+                display: block;
+                width: 100%;
+                text-align: start;
+                padding-left: 7rem;
+            }
+                main#analytics ul li h4{
+                    display: inline-block;
+                    margin-right: .5rem;
+                }

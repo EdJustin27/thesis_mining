@@ -30,5 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem('weightSoilNS',weightSoilNS)
         localStorage.setItem('heightSlope',heightSlope)
         localStorage.setItem('slopeAngle',slopeAngle)
+
+        // redirect after set up
+        window.location.href = "./Real-Time Monitoring.html";
     });
 });
