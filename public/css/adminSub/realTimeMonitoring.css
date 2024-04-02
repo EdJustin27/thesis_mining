@@ -28,7 +28,8 @@ main.monitoring{
 }
 #history{
     display: inline-block;
-    /* width: 400px; */
+    min-width: 250px;
+    max-width: 250px;
     text-align: center;
     padding: 1rem;
 }
