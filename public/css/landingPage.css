@@ -5,7 +5,7 @@
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    color: #fff;
+    color: #080000;
     margin: 0;
     padding: 0;
     display: flex;
@@ -21,19 +21,22 @@ header {
     justify-content: space-around;
     width: 100%;
     padding: 15px;
-    background-color: #DAA520;
+    background-color: #fcbc6f;
     position: fixed;
     top: 0;
     z-index: 2;
 }
+
     header a{
         text-decoration: none;
-        color: white;
+        color: rgb(0, 0, 0);
         font-size: 1rem;
+        font-weight: bold;
     }
 
+    
 .description, .combined-container {
-    background-color: rgba(140, 115, 91, 0.7);
+    background-color: rgba(243, 230, 201, 0.7);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     padding: 20px;
@@ -43,8 +46,9 @@ header {
 }
 
     .combined-container button {
-        background-color: #DAA520;
-        color: #fff;
+        background-color: #fcbc6f;
+        color: #000000;
+        font-weight: bold;
         padding: 10px;
         border: none;
         border-radius: 3px;
@@ -52,9 +56,16 @@ header {
         margin-top: 10px;
     }
 
+    .black-bold-text {
+        font-weight: bold;
+        color: black;
+    }
+    
+
 .learn-more-button {
-    background-color: #DAA520;
-    color: #fff;
+    background-color: #fcbc6f;
+    color: #030000;
+    font-weight: bold;
     padding: 10px;
     border: none;
     border-radius: 3px;
@@ -90,8 +101,8 @@ header {
     .popup-form button {
         width: 100%;
         padding: 10px;
-        background-color: #DAA520;
-        color: #fff;
+        background-color: #fcbc6f;
+        color: #020000;
         border: none;
         border-radius: 4px;
         cursor: pointer;

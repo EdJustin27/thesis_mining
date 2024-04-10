@@ -8,3 +8,8 @@ nav{
         color: white;
         margin-right: 1rem;
     }
+    nav a:hover {
+        color: #474454; /* Change to the desired color */
+    }
+
+    

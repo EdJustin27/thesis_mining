@@ -3,18 +3,18 @@
     margin: 0;
     padding: 0;
     background-color: #1c1c1c;
-    color: #ffffff;
+    color: #0c0101;
 }
 
 header { 
-    background-color: #ff6600;  
+    background-color: #fcbc6f;  
     color: #1c1c1c;
     text-align: center;
-    padding: 15px;
+    padding: 5px;
 }
 
 nav {
-    background-color: #ff6600;
+    background-color: #fcbc6f;
     display: flex;
     justify-content: space-around;
     align-items: center;
