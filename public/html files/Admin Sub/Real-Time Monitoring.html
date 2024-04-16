@@ -14,14 +14,21 @@
         <img src="../../assets/bell.png">
         <h2 id="notifCount">0</h2>
         <ul id="notifList"></ul>
+        <!-- Sound notification -->
+        <audio id="notificationSound">
+            <source src="../../assets/notifsound.wav" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </section>
     <header id="header">
-        <h1>Dynamic Data Monitoring</h1>
+        <!-- Logo -->
+        <img src="../../assets/logo.png" alt="Your Logo" style="float: left; margin-right: 10px; width: 100px; height: auto;">
+        <h1>DYNAMIC DATA MONITORING</h1>
         <nav>
             <a href='./Simulation Control.html'>Simulation Control</a>
             <a href='./Real-Time Monitoring.html'>Real-time Monitoring</a>
             <a href='#analytics'>Analysis Tools & Alerts</a>
-            <a href='./MineSite History.html'>Mine Site History</a>
+            <a href='./MineSite History.html'>Mine Slope History</a>
             <a href='./Help, Feedback, and Suggest.html'>Help, Feedback, & Support</a>
         </nav>
     </header>
@@ -51,6 +58,7 @@
         
         <!-- legend table -->
         <div id="risk-legend-container">
+            <div><h1>LEGEND:</h1></div>
             <div class="risk-legend-item">         
                 <span><div class="low-risk"></div>Low Risk (Stable)</span>
             </div>
@@ -69,26 +77,50 @@
         </div>  
     </main>
 
-    <!-- ANALYTICS -->
-    <main id="analytics">
-        <header id="header">
-            <h1>Analysis Tools & Alerts</h1>
-        </header>        
-        <div>
-            <ul>
-                <h2>Criterias</h2>
-                <li><h4>Low Risk:</h4>Stable</li>
-                <li><h4>Medium Risk:</h4>Potentially Unstable</li>
-                <li><h4>High Risk:</h4>Significant Potential for Instability</li>
-                <li><h4>Very High Risk:</h4>Immenent Threat</li>
-                <li><h4>Critical:</h4>Immediate Danger</li>
-            </ul>
-            <section>
-                <h2>Management: </h2>
-                <p id="managementText"></p>
-            </section>            
-        </div>
-    </main>
+   <!-- ANALYTICS -->
+<main id="analytics">
+    <header id="header">
+        
+        <h1>ANALYSIS TOOLS & ALERTS</h1>
+    </header>        
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>CRITERIAS</th>
+                    <th>RISK LEVEL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Low Risk:</td>
+                    <td>Stable</td>
+                </tr>
+                <tr>
+                    <td>Medium Risk:</td>
+                    <td>Potentially Unstable</td>
+                </tr>
+                <tr>
+                    <td>High Risk:</td>
+                    <td>Significant Potential for Instability</td>
+                </tr>
+                <tr>
+                    <td>Very High Risk:</td>
+                    <td>Imminent Threat</td>
+                </tr>
+                <tr>
+                    <td>Critical:</td>
+                    <td>Immediate Danger</td>
+                </tr>
+            </tbody>
+        </table>
+        <section>
+            <h2>MANAGEMENT:</h2>
+            <p id="managementText"></p>
+        </section>            
+    </div>
+</main>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../../js/realtimeMonitoring.js"></script>
     <script src="../../js/bell.js"></script>

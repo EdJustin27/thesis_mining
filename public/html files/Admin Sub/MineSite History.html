@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mine Site History</title>
+    <title>Mine Slope History</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
             font-weight: bold;
-            background-color: #1c1c1c; /* Black background */
-            color: #d0bc8f; /* Orange text color */
+            /*background-color: #1c1c1c; /* Black background */
+            background-image: url('../../assets/adminPage.jpg');
+            background-position: center;
+            color: #000000; /* Orange text color */
             margin: 0;
             padding: 0;
             overflow-x: hidden;
         }
 
         header {
-            background-color: #fab656; /* Orange header background */
+            background-color: #fcbc6f; /* Orange header background */
             color: #1c1c1c; /* Black text color */
             padding: 15px;
             text-align: center;
@@ -27,8 +29,9 @@
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #262626; /* Dark background for content */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            background-color: #ffffff; /* Dark background for content */
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            
         }
 
         section {
@@ -37,9 +40,9 @@
         }
 
         h2 {
-            color: #ff6600; /* Orange heading color */
+            color: #000000; /* Orange heading color */
             text-transform: uppercase;
-            border-bottom: 2px solid #ff6600;
+            border-bottom: 2px solid #000000;
         }
 
         ul {
@@ -71,21 +74,34 @@
     </style>
     <link rel="stylesheet" href="../../css/bell.css">
     <link rel="stylesheet" href="../../css/adminSub/headerNavBtns.css">
+    
 </head>
 <body>
     <section id="notification">
+        
+       <!-- Notification icon -->
         <img src="../../assets/bell.png">
         <h2 id="notifCount">0</h2>
         <ul id="notifList">
         </ul>
+
+         <!-- Sound notification -->
+         <audio id="notificationSound">
+            <source src="../../assets/notifsound.wav" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </section>
+
     <header id="header">
-        <h1>Mine Site History</h1>
+        <!-- Logo -->
+        <img src="../../assets/logo.png" alt="Your Logo" style="float: left; margin-right: 10px; width: 100px; height: auto;">
+        <h1>MINE SLOPE HISTORY</h1>
         <nav>
+            
             <a href='./Simulation Control.html'>Simulation Control</a>
             <a href='./Real-Time Monitoring.html'>Real-time Monitoring</a>
             <a href='#analytics'>Analysis Tools & Alerts</a>
-            <a href='./MineSite History.html'>Mine Site History</a>
+            <a href='./MineSite History.html'>Mine Slope History</a>
             <a href='./Help, Feedback, and Suggest.html'>Help, Feedback, & Support</a>
         </nav>
     </header>

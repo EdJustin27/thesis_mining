@@ -6,12 +6,12 @@ body {
     font-weight: bold;
     margin: 0;
     padding: 0;
-    background-color: #1c1c1c;
-    color: #f6cf9a;
+    background-color: #ffffff;
+    color: #000000;
     overflow: scroll;
 }
 header {
-    background-color: #fab656;
+    background-color: #fcbc6f;
     color: #1c1c1c;
     padding: 15px;
     text-align: center;
@@ -59,7 +59,7 @@ main.monitoring{
             border-radius: 12px;
         }
         #history ul li{
-            border: 1px solid white;
+            border: 1px solid rgb(0, 0, 0);
             padding: .5rem;
             margin: .2rem .5rem;
             border-radius: 1rem;
@@ -97,7 +97,7 @@ main.monitoring{
 #timeDisplay {
     margin-top: 20px;
     font-size: 20px;
-    color: #ff6600;
+    color: #fcbc6f;
     text-align: center;
 }
 #risk-legend-container {
@@ -106,11 +106,11 @@ main.monitoring{
     bottom: 0;
     right: 0;
     margin: 1rem;
-    background-color: rgba(14, 14, 14, 0.667);
+    background-color: rgba(255, 255, 255, 0.667);
     padding: 1rem;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    color: white;
+    color: rgb(0, 0, 0);
     width: 220px;
     font-size: xx-small;
 }
@@ -171,7 +171,7 @@ main#analytics{
             }
                 main#analytics section p{
                     line-height: 1.5rem;
-                    color: white;
+                    color: rgb(0, 0, 0);
                     text-transform: capitalize;
                 }
             main#analytics ul li{
@@ -184,3 +184,17 @@ main#analytics{
                     display: inline-block;
                     margin-right: .5rem;
                 }
+
+                table {
+                    border-collapse: collapse;
+                    width: 30%;
+                  }
+                  th, td {
+                    border: 1px solid #ffffff;
+                    padding: 8px;
+                    text-align: left;
+                    
+                  }
+                  th {
+                    background-color: #b3a0a0;
+                  }

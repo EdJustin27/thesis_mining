@@ -7,10 +7,17 @@
 }
 
 header { 
+
     background-color: #fcbc6f;  
     color: #1c1c1c;
     text-align: center;
-    padding: 5px;
+    padding: 1em 0;
+}
+
+.logo {
+    position: absolute; /* Position the logo absolutely within the header */
+    top: 10px; /* Adjust the top position as needed */
+    left: 10px; /* Adjust the left position as needed */
 }
 
 nav {
@@ -18,13 +25,18 @@ nav {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 10px;
+    padding: 0;
 }
 
-    nav a {
+h1 {
+    font-size: 36px; /* Adjust the font size as needed */
+}
+
+nav a {
         text-decoration: none;
-        color: #ffffff;
-        padding: 10px;
+        font-weight: bold;
+        color: #000000;
+        padding: 0;
         text-align: center;
         transition: background-color 0.3s;
     }

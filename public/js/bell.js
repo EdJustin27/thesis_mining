@@ -39,4 +39,9 @@ outside.forEach(tag => {
     })
 })
 
+function playNotificationSound() {
+    var sound = document.getElementById("notificationSound");
+    sound.play();
+}
+
 

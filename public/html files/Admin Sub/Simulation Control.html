@@ -8,31 +8,38 @@
     <link rel="stylesheet" href="../../css/bell.css">
     <link rel="stylesheet" href="../../css/adminSub/headerNavBtns.css">
 </head>
-<body>
+<body style="margin: 0;">
     <section id="notification">
         <img src="../../assets/bell.png">
         <h2 id="notifCount">0</h2>
         <ul id="notifList">
         </ul>
+        <!-- Sound notification -->
+        <audio id="notificationSound">
+            <source src="../../assets/notifsound.wav" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </section>
     <header id="header">
-        <h1>Simulation Control</h1>
+        <!-- Logo -->
+        <img src="../../assets/logo.png" alt="Your Logo" style="float: left; margin-right: 10px; width: 100px; height: auto;">
+        <h1>SIMULATION CONTROL</h1>
         <nav>
             <a href='./Simulation Control.html'>Simulation Control</a>
             <a href='./Real-Time Monitoring.html'>Real-time Monitoring</a>
             <a href='#analytics'>Analysis Tools & Alerts</a>
-            <a href='./MineSite History.html'>Mine Site History</a>
+            <a href='./MineSite History.html'>Mine Slope History</a>
             <a href='./Help, Feedback, and Suggest.html'>Help, Feedback, & Support</a>
         </nav>
     </header>
 
-    <div id="body" class="container">
+    <div class="background-image">
         <section id="formulaSection" class="box">
             <img src="../../assets/formula.png" alt="formula of Bishop's Method">
             <!-- Placeholder for formula -->
         </section>
         
-        <section id="parameterInputs" class="box">
+        <div id="parameterInputs" class="box">
             <h2>Simulation Parameters</h2>
             <form id="constantParameters">
                 <div class="input-group">
@@ -61,6 +68,7 @@
                 </div>
                 <button id="fixEditButton" type="submit">Fix/Edit</button>             
             </form>
+        </div>
     </section>
 </section>
     <script src="../../js/constant.js"></script>

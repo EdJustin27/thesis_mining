@@ -16,10 +16,10 @@
         margin: 0;
         position: absolute;
         top: 15%;
-        left: 70%;
+        left: 85%;
         transform: translate(-50%, -50%);
-        color: white;
-        text-shadow: 0 0 3px red;
+        color: rgb(0, 0, 0);
+        text-shadow: 0 0 3px rgb(0, 0, 0);
         font-weight: bolder;
     }
     #notification h3{

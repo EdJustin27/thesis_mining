@@ -4,19 +4,30 @@
 }
 
 header {
-    background: #fab656;
+    background: #fcbc6f;
     color: #060313;
     text-align: center;
-    padding: 1em 0;
+    padding: 1em;
 }
 
-.container {
-    background: #1c1c1c;
+.background-image {
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     padding: 20px;
+    /* Set the background image */
+    background-image: url('../../assets/adminPage.jpg');
+
+    /* Specify the size and position of the background image */
+    background-size: cover; /* Cover the entire element */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Do not repeat the background image */
+    
+    /* Set the dimensions of the element */
+    width: 100%;
+    height: 800px; /* Adjust the height as needed */
 }
 
 .box {
@@ -24,9 +35,9 @@ header {
     max-width: 600px;
     margin-bottom: 20px;
     padding: 20px;
-    background: #f7f7f7;
+    background: linear-gradient(to right, rgba(207, 182, 182, 0.5), rgba(223, 205, 147, 0.5)); /* Semi-transparent gradient */
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(7, 7, 7, 0.5); /* Optional: Adding a shadow for depth */
 }
 
 .input-group {
@@ -83,14 +94,14 @@ header {
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
-    background: #474454; /* A warm color indicating an action like fixing or editing */
-    color: white;
+    background: #fcbc6f; /* A warm color indicating an action like fixing or editing */
+    color: rgb(0, 0, 0);
     cursor: pointer;
     font-size: 16px;
 }
 
     #fixEditButton:hover {
-        background: #ec971f; /* Darker shade on hover for visual feedback */
+        background: #1c1c1c; /* Darker shade on hover for visual feedback */
     }
 #formulaSection{
     text-align: center;
